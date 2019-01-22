@@ -1,18 +1,17 @@
-using Die;
 using System.Collections.Generic;
 
-class Roller
+namespace Yatzoo
 {
-    List<Die> dice { get; set; }
 
-    public Roller() { }
-
-    void roll()
+    class Roller<T>
     {
-        foreach (var die in dice)
+        List<Die<T>> dice { get; set; }
+
+        public Roller() { }
+
+        T roll()
         {
-            var type = die.GetType();
-            die = EnumHelper.GetRandomEnum<type>();
+            return EnumHelper.RandomEnum<T>();
         }
     }
 }
