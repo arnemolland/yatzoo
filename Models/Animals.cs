@@ -1,4 +1,4 @@
-namespace Yatzoo
+namespace Yatzoo.Models
 {
     public enum Animals
     {

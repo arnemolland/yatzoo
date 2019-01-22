@@ -1,5 +1,10 @@
-public class Player {
-    public string name;
+namespace Yatzoo.Models
+{
 
-    public Player() { }
+    public class Player
+    {
+        public string name;
+
+        public Player() { }
+    }
 }

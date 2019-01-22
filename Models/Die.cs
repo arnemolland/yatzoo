@@ -1,10 +1,14 @@
 using System.Collections.Generic;
-class Die<T>
+
+namespace Yatzoo.Models
 {
-    public List<T> eyes { get; set; }
+    class Die<T>
+    {
+        public List<T> eyes { get; set; }
 
-    public Die() { }
+        public Die() { }
 
-    public Die(List<T> eyes) => this.eyes = eyes;
+        public Die(List<T> eyes) => this.eyes = eyes;
 
+    }
 }
