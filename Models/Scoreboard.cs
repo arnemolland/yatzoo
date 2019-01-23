@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Yatzoo.Models
+namespace yatzoo.Models
 {
     class Scoreboard
     {

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Yatzoo.Models
+namespace yatzoo.Models
 {
     class Die<T>
     {

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 
-namespace Yatzoo
+namespace yatzoo.Helpers
 {
 
     public static class EnumHelper

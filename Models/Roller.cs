@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-
-namespace Yatzoo.Models
+using yatzoo.Helpers;
+namespace yatzoo.Models
 {
 
     class Roller<T>

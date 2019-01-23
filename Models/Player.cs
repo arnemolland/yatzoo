@@ -1,4 +1,4 @@
-namespace Yatzoo.Models
+namespace yatzoo.Models
 {
 
     public class Player

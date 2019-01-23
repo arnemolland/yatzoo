@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System;
 
-namespace Yatzoo.Models
+namespace yatzoo.Models
 {
     class Lobby
     {

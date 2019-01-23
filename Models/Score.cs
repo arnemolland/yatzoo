@@ -1,10 +1,20 @@
-namespace Yatzoo.Models
+namespace yatzoo.Models
 {
 
     public class Score
     {
         public Player player { get; set; }
-        public int score { get; set; }
+        public int score
+        {
+            get
+            {
+                return score;
+            }
+            set
+            {
+                score += value;
+            }
+        }
 
         public Score()
         {

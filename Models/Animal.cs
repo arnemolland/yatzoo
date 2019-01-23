@@ -1,6 +1,6 @@
-namespace Yatzoo.Models
+namespace yatzoo.Models
 {
-    public enum Animals
+    public enum Animal
     {
         lion,
         snake,
