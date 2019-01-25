@@ -27,6 +27,7 @@ namespace yatzoo.Hubs {
 
         public async Task JoinLobby(string userId, string lobbyId) {
             await Clients.All.SendAsync("joinLobby", userId, lobbyId);
+            await Groups.AddToGroupAsync(Context.ConnectionId, lobbyId);
         }
 
         public override async Task OnConnectedAsync() {
