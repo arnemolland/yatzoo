@@ -9,7 +9,7 @@ using yatzoo.Data;
 namespace yatzoo.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190125201404_DbSetup")]
+    [Migration("20190125225347_DbSetup")]
     partial class DbSetup
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -17,6 +17,19 @@ namespace yatzoo.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.1-servicing-10028");
+
+            modelBuilder.Entity("yatzoo.Models.Game", b =>
+                {
+                    b.Property<Guid>("id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("name")
+                        .IsRequired();
+
+                    b.HasKey("id");
+
+                    b.ToTable("games");
+                });
 
             modelBuilder.Entity("yatzoo.Models.Lobby", b =>
                 {

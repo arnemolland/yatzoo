@@ -8,6 +8,18 @@ namespace yatzoo.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "games",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(nullable: false),
+                    name = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_games", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "lobbies",
                 columns: table => new
                 {
@@ -61,6 +73,9 @@ namespace yatzoo.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "games");
+
             migrationBuilder.DropTable(
                 name: "messages");
 
