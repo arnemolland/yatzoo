@@ -32,22 +32,7 @@ namespace yatzoo.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "messages",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(nullable: false),
-                    lobbyId = table.Column<Guid>(nullable: false),
-                    contents = table.Column<string>(nullable: false),
-                    username = table.Column<string>(nullable: false),
-                    postedAt = table.Column<DateTimeOffset>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_messages", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Player",
+                name: "players",
                 columns: table => new
                 {
                     id = table.Column<Guid>(nullable: false),
@@ -56,18 +41,44 @@ namespace yatzoo.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Player", x => x.id);
+                    table.PrimaryKey("PK_players", x => x.id);
                     table.ForeignKey(
-                        name: "FK_Player_lobbies_Lobbyid",
+                        name: "FK_players_lobbies_Lobbyid",
                         column: x => x.Lobbyid,
                         principalTable: "lobbies",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "messages",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(nullable: false),
+                    lobbyId = table.Column<Guid>(nullable: false),
+                    contents = table.Column<string>(nullable: false),
+                    userid = table.Column<Guid>(nullable: false),
+                    postedAt = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_messages", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_messages_players_userid",
+                        column: x => x.userid,
+                        principalTable: "players",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
-                name: "IX_Player_Lobbyid",
-                table: "Player",
+                name: "IX_messages_userid",
+                table: "messages",
+                column: "userid");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_players_Lobbyid",
+                table: "players",
                 column: "Lobbyid");
         }
 
@@ -80,7 +91,7 @@ namespace yatzoo.Migrations
                 name: "messages");
 
             migrationBuilder.DropTable(
-                name: "Player");
+                name: "players");
 
             migrationBuilder.DropTable(
                 name: "lobbies");

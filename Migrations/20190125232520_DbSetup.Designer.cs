@@ -9,7 +9,7 @@ using yatzoo.Data;
 namespace yatzoo.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190125225347_DbSetup")]
+    [Migration("20190125232520_DbSetup")]
     partial class DbSetup
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,12 +54,13 @@ namespace yatzoo.Migrations
 
                     b.Property<Guid>("lobbyId");
 
-                    b.Property<DateTimeOffset>("postedAt");
+                    b.Property<DateTime>("postedAt");
 
-                    b.Property<string>("username")
-                        .IsRequired();
+                    b.Property<Guid>("userid");
 
                     b.HasKey("id");
+
+                    b.HasIndex("userid");
 
                     b.ToTable("messages");
                 });
@@ -77,7 +78,15 @@ namespace yatzoo.Migrations
 
                     b.HasIndex("Lobbyid");
 
-                    b.ToTable("Player");
+                    b.ToTable("players");
+                });
+
+            modelBuilder.Entity("yatzoo.Models.Message", b =>
+                {
+                    b.HasOne("yatzoo.Models.Player", "user")
+                        .WithMany()
+                        .HasForeignKey("userid")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("yatzoo.Models.Player", b =>
