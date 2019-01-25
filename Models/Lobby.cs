@@ -12,9 +12,10 @@ namespace yatzoo.Models
         [Required]
         public string name { get; set; }
 
-        public Guid id {get;set;}
+        public Guid id { get; set; }
 
-        public Lobby() {
+        public Lobby()
+        {
             this.id = Guid.NewGuid();
             this.creationTime = DateTime.Now;
         }
@@ -27,7 +28,8 @@ namespace yatzoo.Models
             this.name = id.ToString();
         }
 
-        public Lobby(string name) {
+        public Lobby(string name)
+        {
             this.name = name;
             this.creationTime = DateTime.Now;
             this.players = new List<Player>();

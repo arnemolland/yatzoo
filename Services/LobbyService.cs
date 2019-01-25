@@ -6,17 +6,21 @@ using yatzoo.Data;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
-namespace yatzoo.Services {
-    public class LobbyService : ILobbyService {
+namespace yatzoo.Services
+{
+    public class LobbyService : ILobbyService
+    {
         private readonly ApplicationDbContext _context;
 
         public LobbyService(ApplicationDbContext context) => _context = context;
 
-        public async Task<List<Lobby>> GetLobbiesAsync() {
+        public async Task<List<Lobby>> GetLobbiesAsync()
+        {
             return await _context.lobbies.ToListAsync<Lobby>();
         }
 
-        public async Task<bool> AddLobbyAsync(Lobby lobby) {
+        public async Task<bool> AddLobbyAsync(Lobby lobby)
+        {
             lobby.id = Guid.NewGuid();
             _context.lobbies.Add(lobby);
             return await _context.SaveChangesAsync() > 0;

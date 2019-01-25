@@ -19,18 +19,14 @@ namespace yatzoo.Services
 
         public async Task<List<Message>> GetMessagesAsync()
         {
-            var messages = await _context.messages.ToListAsync<Message>();
-
-            return messages;
+            return await _context.messages.ToListAsync<Message>();
         }
 
         public async Task<List<Message>> GetMessagesInLobbyAsync(Guid lobbyId)
         {
-            var messagesForRoom = await _context.messages
-                                      .Where(m => m.lobbyId == lobbyId)
-                                               .ToListAsync<Message>();
-
-            return messagesForRoom;
+            return (await _context.messages
+                                       .Where(m => m.lobbyId == lobbyId)
+                                                .ToListAsync<Message>());
         }
 
         public async Task<bool> AddMessageToLobbyAsync(Guid lobbyId, Message message)
