@@ -33,7 +33,7 @@ namespace yatzoo.Services
         {
             message.id = Guid.NewGuid();
             message.lobbyId = lobbyId;
-            message.postedAt = DateTimeOffset.Now;
+            message.postedAt = DateTime.Now;
 
             _context.messages.Add(message);
 

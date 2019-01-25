@@ -16,6 +16,7 @@ namespace yatzoo.Data
         public DbSet<Lobby> lobbies { get; set; }
         public DbSet<Message> messages { get; set; }
         public DbSet<Game> games { get; set; }
+        public DbSet<Player> players {get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

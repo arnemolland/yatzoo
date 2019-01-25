@@ -11,7 +11,7 @@ namespace yatzoo.Models
         [Required]
         public string contents { get; set; }
         [Required]
-        public string username { get; set; }
-        public DateTimeOffset postedAt { get; set; }
+        public Player user { get; set; }
+        public DateTime postedAt { get; set; }
     }
 }
