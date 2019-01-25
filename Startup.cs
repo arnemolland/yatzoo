@@ -5,7 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using yatzoo.Hubs;
+using yatzoo.Data;
 namespace yatzoo
 {
     public class Startup
@@ -20,14 +23,23 @@ namespace yatzoo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(
+                Configuration.GetConnectionString("DefaultConnection")
+            ));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-			services.AddCors(options => options.AddPolicy("CorsPolicy", 
-            builder => 
+            services.AddCors(options => options.AddPolicy("CorsPolicy",
+            builder =>
             {
                 builder
-					.AllowAnyMethod()
-					.AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
                     .AllowAnyOrigin()
                     .AllowCredentials();
             }));
@@ -55,11 +67,12 @@ namespace yatzoo
                 app.UseHsts();
             }
 
-			app.UseCors("CorsPolicy");
+            app.UseCors("CorsPolicy");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
-            app.UseSignalR(routes => {
+            app.UseSignalR(routes =>
+            {
                 routes.MapHub<LobbyHub>("/play");
                 routes.MapHub<MainHub>("/main");
                 routes.MapHub<GameHub>("/game");

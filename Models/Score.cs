@@ -4,26 +4,26 @@ namespace yatzoo.Models
     public class Score
     {
         public Player player { get; set; }
-        public int score
+        public int value
         {
             get
             {
-                return score;
+                return this.value;
             }
             set
             {
-                score += value;
+                this.value += value;
             }
         }
 
         public Score()
         {
-            score = 0;
+            value = 0;
         }
 
         public Score(Player player)
         {
-            this.score = 0;
+            this.value = 0;
             this.player = player;
         }
     }

@@ -10,7 +10,7 @@ class YatzooController extends Component {
 					<div>MUUDUhh</div>
 				</div>
 
-				<button>Roll dat shid</button>
+				<button className="btn btn-primary">Roll dat shid</button>
 			</div>
 		)
 	}
