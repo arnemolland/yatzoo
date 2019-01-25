@@ -8,6 +8,7 @@ namespace yatzoo.Models
         Lobby lobby { get; }
         Roller<T> roller { get; }
         Scoreboard board { get; }
+        Game game { get; }
 
         public GameState()
         {
@@ -21,6 +22,20 @@ namespace yatzoo.Models
             this.lobby = lobby;
             roller = new Roller<T>();
             board = new Scoreboard();
+        }
+
+        public GameState(Game game)
+        {
+            this.game = game;
+            roller = new Roller<T>();
+            board = new Scoreboard();
+            lobby = new Lobby();
+        }
+
+        public GameState(Game game, Lobby lobby)
+        {
+            this.game = game;
+            this.lobby = lobby;
         }
     }
 }
