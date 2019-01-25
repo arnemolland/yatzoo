@@ -10,8 +10,8 @@ namespace yatzoo.Controllers
 
     public class LobbyController : Controller
     {
-
         [Route("api/[controller]")]
+        [ApiController]
         class GameLobby
         {
             Lobby currentLobby { get; set; }

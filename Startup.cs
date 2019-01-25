@@ -50,6 +50,9 @@ namespace yatzoo
             app.UseSpaStaticFiles();
             app.UseSignalR(routes => {
                 routes.MapHub<LobbyHub>("/play");
+                routes.MapHub<MainHub>("/main");
+                routes.MapHub<GameHub>("/game");
+                routes.MapHub<TestHub>("/test");
             });
 
             app.UseMvc(routes =>
