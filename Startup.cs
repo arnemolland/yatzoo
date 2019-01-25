@@ -22,6 +22,16 @@ namespace yatzoo
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+			services.AddCors(options => options.AddPolicy("CorsPolicy", 
+            builder => 
+            {
+                builder
+					.AllowAnyMethod()
+					.AllowAnyHeader()
+                    .AllowAnyOrigin()
+                    .AllowCredentials();
+            }));
+
             services.AddSignalR();
 
             // In production, the React files will be served from this directory
@@ -45,6 +55,7 @@ namespace yatzoo
                 app.UseHsts();
             }
 
+			app.UseCors("CorsPolicy");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
