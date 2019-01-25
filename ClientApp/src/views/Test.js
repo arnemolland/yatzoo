@@ -16,7 +16,7 @@ class Test extends Component {
 
 	sendMessage = () => {
 		this.state.hubConnection
-			.invoke('broadcastMessage', this.state.nick, this.state.message)
+			.invoke('sendMessage', this.state.nick, this.state.message)
 			.then(() => this.setState({message: ''}))
 			.catch(err => console.error(err))
 	}
@@ -25,17 +25,15 @@ class Test extends Component {
 		const nick = "John" //window.prompt('Your name:', 'John');
 
 		const hubConnection = new HubConnectionBuilder()
-		.configureLogging(LogLevel.Trace)
-			.withUrl('http://localhost:5001/testhub')
+			.configureLogging(LogLevel.Trace)
+			.withUrl('https://localhost:5001/testhub')
 			.build()
-
-		
 
 		this.setState({hubConnection, nick}, () => {
 			this.state.hubConnection
-				.start()
+				.start({credentials: false})
 				.then(() => console.log('Connection started with Hub!'))
-				.catch(err => console.log('Error while establishing connection with Hub:('))
+				.catch(err => console.log('Error while establishing connection with Hub:(' + err.message))
 
 			this.state.hubConnection.on('broadcastMessage', (nick, receivedMessage) => {
 				const text = `${nick}: ${receivedMessage}`
