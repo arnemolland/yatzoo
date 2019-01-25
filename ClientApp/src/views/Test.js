@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {HubConnectionBuilder} from '@aspnet/signalr'
+import {HubConnectionBuilder, LogLevel} from '@aspnet/signalr'
 
 class Test extends Component {
 
@@ -22,11 +22,14 @@ class Test extends Component {
 	}
 
 	componentDidMount = () => {
-		const nick = "Ni🅱️ba" //window.prompt('Your name:', 'John');
+		const nick = "John" //window.prompt('Your name:', 'John');
 
 		const hubConnection = new HubConnectionBuilder()
-			.withUrl('http://localhost:5001/test')
+		.configureLogging(LogLevel.Trace)
+			.withUrl('http://localhost:5001/testhub')
 			.build()
+
+		
 
 		this.setState({hubConnection, nick}, () => {
 			this.state.hubConnection
