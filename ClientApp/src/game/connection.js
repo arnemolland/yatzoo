@@ -1,0 +1,11 @@
+
+
+class YatzooService {
+	constructor() {
+
+	}
+
+	connect() {
+		
+	}
+}

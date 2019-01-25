@@ -1,0 +1,8 @@
+class YatzooGameClient {
+
+	createConnection() {
+
+	}
+
+	
+}
