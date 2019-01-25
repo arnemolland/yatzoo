@@ -1,9 +1,18 @@
+using System;
+using System.ComponentModel.DataAnnotations;
 namespace yatzoo.Models
 {
 
-    interface Game
+    public class Game
     {
-        string name { get; set; }
-        void setup();
+        [Required]
+        public string name { get; set; }
+        public Guid id { get; set; }
+        Roller roller { get; set; }
+        GameState state { get; set; }
+        void setup()
+        {
+
+        }
     }
 }

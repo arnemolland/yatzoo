@@ -1,17 +1,18 @@
 using System.Collections.Generic;
 using yatzoo.Helpers;
+using System;
 namespace yatzoo.Models
 {
 
-    class Roller<T>
+    public class Roller
     {
-        List<Die<T>> dice { get; set; }
+        List<Die> dice { get; set; }
 
         public Roller() { }
 
-        T roll()
+        Animal roll()
         {
-            return EnumHelper.RandomEnum<T>();
+            return EnumHelper.RandomEnum<Animal>();
         }
     }
 }

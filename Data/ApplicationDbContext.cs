@@ -13,10 +13,11 @@ namespace yatzoo.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options) { }
 
-        public DbSet<Lobby> lobbies {get; set;}
-        public DbSet<Message> messages {get; set;}
-
-        protected override void OnModelCreating(ModelBuilder builder) {
+        public DbSet<Lobby> lobbies { get; set; }
+        public DbSet<Message> messages { get; set; }
+        public DbSet<Game> games { get; set; }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
             base.OnModelCreating(builder);
         }
     }

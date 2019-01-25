@@ -2,13 +2,13 @@ using System.Collections.Generic;
 
 namespace yatzoo.Models
 {
-    class Die<T>
+    class Die
     {
-        public List<T> eyes { get; set; }
+        public List<Animal> eyes { get; set; }
 
         public Die() { }
 
-        public Die(List<T> eyes) => this.eyes = eyes;
+        public Die(List<Animal> eyes) => this.eyes = eyes;
 
     }
 }
