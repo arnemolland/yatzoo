@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using yatzoo.Hubs;
 using yatzoo.Data;
+using yatzoo.Services;
 namespace yatzoo
 {
     public class Startup
@@ -33,6 +34,9 @@ namespace yatzoo
                 Configuration.GetConnectionString("DefaultConnection")
             ));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddScoped<ILobbyService, LobbyService>();
+            services.AddScoped<IMessageService, MessageService>();
 
             services.AddCors(options => options.AddPolicy("CorsPolicy",
             builder =>
