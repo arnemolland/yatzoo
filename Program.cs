@@ -20,6 +20,7 @@ namespace yatzoo
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .SuppressStatusMessages(true)
                 .UseStartup<Startup>();
     }
 }
