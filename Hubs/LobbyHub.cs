@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
+using System;
 using yatzoo.Models;
 using yatzoo.Services;
 
@@ -11,17 +12,22 @@ namespace yatzoo.Hubs
         private readonly IMessageService _messageService;
         private readonly IPlayerService _playerService;
 
+        public async Task GetPlayers(Guid lobbyId)
+        {
+            var lobby = await _lobbyService.GetLobbyById(lobbyId);
+            await Clients.Group(lobbyId.ToString()).SendAsync("players", lobby.players);
+        }
         public LobbyHub(ILobbyService lobbyService, IMessageService messageService, IPlayerService playerService)
         {
             _lobbyService = lobbyService;
             _messageService = messageService;
             _playerService = playerService;
         }
-        public async Task CreateLobby(string id)
+        public async Task CreateLobby(Guid id)
         {
             await Clients.All.SendAsync("ReceiveMessage", id, "Lobby created");
         }
-        public Task AddToLobby(string lobby, string connectionId) => Groups.AddToGroupAsync(groupName: lobby, connectionId: connectionId);
-        public async Task RemoveFromLobby(string lobby, string connectionId) => await Groups.RemoveFromGroupAsync(groupName: lobby, connectionId: connectionId);
+        public Task AddToLobby(Guid lobbyId, Guid playerId) => Groups.AddToGroupAsync(groupName: lobbyId.ToString(), connectionId: playerId.ToString());
+        public async Task RemoveFromLobby(Guid lobbyId, Guid playerId) => await Groups.RemoveFromGroupAsync(groupName: lobbyId.ToString(), connectionId: playerId.ToString());
     }
 }

@@ -8,8 +8,6 @@ namespace yatzoo.Hubs
 {
     public class TestHub : Hub
     {
-
-
         private readonly ILobbyService _lobbyService;
         private readonly IMessageService _messageService;
         private readonly IPlayerService _playerService;
@@ -28,6 +26,7 @@ namespace yatzoo.Hubs
                 contents = message,
                 user = await _playerService.GetPlayerByIdAsync(playerId),
             };
+            
             await _messageService.AddMessageToLobbyAsync(lobbyId, m);
             await Clients.All.SendAsync("broadcastMessage", m.user.name, message, m.id, m.postedAt);
         }

@@ -8,16 +8,30 @@ namespace yatzoo.Hubs
 {
     public class MainHub : Hub
     {
-
+        private readonly IPlayerService _playerService;
         private readonly ILobbyService _lobbyService;
         private readonly IMessageService _messageService;
 
         public int usersOnline;
 
-        public MainHub(ILobbyService lobbyService, IMessageService messageService)
+        public async Task GetUserCount() {
+            await Clients.All.SendAsync("playerCount", usersOnline);
+        }
+
+        public async Task GetLobbies() {
+            await Clients.All.SendAsync("lobbies", _lobbyService.GetLobbiesAsync());
+        }
+
+        public async Task SendMessage(string message, Guid playerId) {
+            var player = await _playerService.GetPlayerByIdAsync(playerId);
+            await Clients.All.SendAsync("broadcastMessage", message, player);
+        }
+
+        public MainHub(ILobbyService lobbyService, IMessageService messageService, IPlayerService playerService)
         {
             _lobbyService = lobbyService;
             _messageService = messageService;
+            _playerService = playerService;
         }
         public async Task AddLobby(string name)
         {
@@ -30,10 +44,10 @@ namespace yatzoo.Hubs
             await Clients.All.SendAsync("newLobbyCreated", name, lobby.id);
         }
 
-        public async Task JoinLobby(string userId, string lobbyId)
+        public async Task JoinLobby(string userId, Guid lobbyId)
         {
             await Clients.All.SendAsync("joinLobby", userId, lobbyId);
-            await Groups.AddToGroupAsync(Context.ConnectionId, lobbyId);
+            await Groups.AddToGroupAsync(Context.ConnectionId, lobbyId.ToString());
         }
 
         public override async Task OnConnectedAsync()
