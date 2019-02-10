@@ -13,4 +13,4 @@ There are some prerequisites for building this project.
 
 Make sure to run `npm install` in the `ClientApp` directory before attempting to build.
 
-To build, run `dotnet run` in the root folder.
+To build, run `dotnet build` in the source folder.
