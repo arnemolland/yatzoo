@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using yatzoo.Models;
+using yatzoo.ViewModels;
 
 namespace yatzoo.Controllers
 {

@@ -25,7 +25,7 @@ namespace yatzoo.Hubs
         }
         public async Task CreateLobby(Guid id)
         {
-            await Clients.All.SendAsync("ReceiveMessage", id, "Lobby created");
+            await Clients.All.SendAsync("lobbyCreated", id, "Lobby created");
         }
         public Task AddToLobby(Guid lobbyId, Guid playerId) => Groups.AddToGroupAsync(groupName: lobbyId.ToString(), connectionId: playerId.ToString());
         public async Task RemoveFromLobby(Guid lobbyId, Guid playerId) => await Groups.RemoveFromGroupAsync(groupName: lobbyId.ToString(), connectionId: playerId.ToString());
