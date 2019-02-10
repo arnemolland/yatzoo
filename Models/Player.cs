@@ -11,6 +11,11 @@ namespace yatzoo.Models
         [Key]
         public Guid id { get; set; }
 
-        public Player() { }
+        public Player() {}
+
+        public Player(string name) {
+            this.name = name;
+            this.id = Guid.NewGuid();
+        }
     }
 }

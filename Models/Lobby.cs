@@ -8,10 +8,9 @@ namespace yatzoo.Models
     {
         public List<Player> players { get; set; }
         public DateTime creationTime { get; }
-
-        [Required]
         public string name { get; set; }
 
+        [Key]
         public Guid id { get; set; }
 
         public Lobby()

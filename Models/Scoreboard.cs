@@ -3,22 +3,32 @@ using System.Linq;
 
 namespace yatzoo.Models
 {
-    class Scoreboard
+    public class Scoreboard
     {
-        List<Score> board { get; set; }
+        public List<Score> board
+        {
+            get
+            {
+                return this.board.OrderBy(x => x.value).ToList();
+            }
+            set
+            {
+                this.board = value;
+            }
+        }
 
-        void updateScore(Score newScore)
+        public void updateScore(Score newScore)
         {
             var currentScore = board.Find(current => current.player.Equals(newScore.player));
             currentScore = newScore;
         }
 
-        void addScore(Score score)
+        public void addScore(Score score)
         {
             board.Add(score);
         }
 
-        void removeScore(Score score)
+        public void removeScore(Score score)
         {
             board.Remove(board.Find(v => v.player.Equals(score.player)));
         }
