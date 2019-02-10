@@ -1,6 +1,6 @@
 using System;
 
-namespace yatzoo.Models
+namespace yatzoo.ViewModels
 {
     public class ErrorViewModel
     {
