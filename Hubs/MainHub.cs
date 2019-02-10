@@ -18,6 +18,10 @@ namespace yatzoo.Hubs
             await Clients.All.SendAsync("playerCount", usersOnline);
         }
 
+        public async Task GetUserId() {
+            await Clients.User(Context.ConnectionId.ToString()).SendAsync("userId", Context.ConnectionId.ToString());
+        }
+
         public async Task GetLobbies() {
             await Clients.All.SendAsync("lobbies", _lobbyService.GetLobbiesAsync());
         }
@@ -44,10 +48,10 @@ namespace yatzoo.Hubs
             await Clients.All.SendAsync("newLobbyCreated", name, lobby.id);
         }
 
-        public async Task JoinLobby(string userId, Guid lobbyId)
+        public async Task JoinLobby(Guid userId, Guid lobbyId)
         {
             await Clients.All.SendAsync("joinLobby", userId, lobbyId);
-            await Groups.AddToGroupAsync(Context.ConnectionId, lobbyId.ToString());
+            await Groups.AddToGroupAsync(connectionId: userId.ToString(), groupName: lobbyId.ToString());
         }
 
         public override async Task OnConnectedAsync()
