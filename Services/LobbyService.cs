@@ -19,6 +19,10 @@ namespace yatzoo.Services
             return await _context.lobbies.ToListAsync<Lobby>();
         }
 
+        public async Task<Lobby> GetLobbyById(Guid id) {
+            return await _context.lobbies.FindAsync(id);
+        }
+
         public async Task<bool> AddLobbyAsync(Lobby lobby)
         {
             lobby.id = Guid.NewGuid();
