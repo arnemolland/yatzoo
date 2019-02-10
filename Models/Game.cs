@@ -8,9 +8,9 @@ namespace yatzoo.Models
         [Required]
         public string name { get; set; }
         public Guid id { get; set; }
-        Roller roller { get; set; }
-        GameState state { get; set; }
-        void setup()
+        public Roller roller { get; set; }
+        public GameState state { get; set; }
+        public void setup()
         {
 
         }

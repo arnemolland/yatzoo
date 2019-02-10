@@ -35,7 +35,5 @@ namespace yatzoo.Services
             _context.games.Remove(game);
             return await _context.SaveChangesAsync() > 0;
         }
-
-
     }
 }

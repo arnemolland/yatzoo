@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace yatzoo.Models
 {
-    class Die
+    public class Die
     {
         public List<Animal> eyes { get; set; }
 
